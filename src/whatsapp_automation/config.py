@@ -27,6 +27,14 @@ class Settings(BaseSettings):
     whatsapp_graph_api_version: str = Field(default="v23.0", alias="WHATSAPP_GRAPH_API_VERSION")
     log_level: str = Field(default="INFO", alias="LOG_LEVEL")
 
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def normalize_database_url(cls, value: str) -> str:
+        # Railway/Render use "postgresql://" but psycopg requires "postgresql+psycopg://"
+        if value.startswith("postgresql://"):
+            return value.replace("postgresql://", "postgresql+psycopg://", 1)
+        return value
+
     @field_validator("media_storage_root", mode="before")
     @classmethod
     def expand_media_storage_root(cls, value: str | Path) -> Path:
