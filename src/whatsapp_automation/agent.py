@@ -122,6 +122,9 @@ async def process_message_with_agent(
         f"{message_text}"
     )
 
+    def _log_stderr(line: str) -> None:
+        logger.debug("claude-cli: %s", line.rstrip())
+
     options = ClaudeAgentOptions(
         system_prompt=SYSTEM_PROMPT,
         mcp_servers={"portfolio": portfolio_mcp},
@@ -135,6 +138,7 @@ async def process_message_with_agent(
         ],
         max_turns=15,
         env={"ANTHROPIC_API_KEY": settings.anthropic_api_key},
+        stderr=_log_stderr,
     )
 
     result_text = ""
