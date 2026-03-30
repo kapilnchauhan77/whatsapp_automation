@@ -1,0 +1,50 @@
+{
+  "project": "WhatsApp Trade Agent",
+  "branchName": "ralph/trade-agent",
+  "description": "Fix bugs in the WhatsApp trade agent implementation and add comprehensive tests for portfolio CRUD, agent integration, and webhook flow.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Portfolio CRUD tests",
+      "description": "As a developer, I want tests for portfolio add/remove/get operations so that I can verify the portfolio module works correctly.",
+      "acceptanceCriteria": [
+        "Test add_holding creates a new holding and transaction",
+        "Test add_holding updates avg_price on second buy",
+        "Test remove_holding reduces quantity and logs transaction",
+        "Test remove_holding rejects overselling",
+        "Test get_portfolio returns correct holdings",
+        "Test get_transactions returns recent history",
+        "Tests pass"
+      ],
+      "priority": 1,
+      "passes": false
+    },
+    {
+      "id": "US-002",
+      "title": "Webhook agent integration test",
+      "description": "As a developer, I want to verify that the webhook handler correctly routes inbound messages to the agent processor.",
+      "acceptanceCriteria": [
+        "Test that inbound text messages trigger process_with_agent background task",
+        "Test that non-text messages get a fallback acknowledgment",
+        "Existing webhook tests still pass",
+        "Tests pass"
+      ],
+      "priority": 2,
+      "passes": false
+    },
+    {
+      "id": "US-003",
+      "title": "Verify all modules import and ANTHROPIC_API_KEY config",
+      "description": "As a developer, I want all new modules to import cleanly and config to load correctly.",
+      "acceptanceCriteria": [
+        "agent.py imports without errors",
+        "portfolio.py imports without errors",
+        "messaging.py imports without errors",
+        "ANTHROPIC_API_KEY loads from .env",
+        "Tests pass"
+      ],
+      "priority": 3,
+      "passes": false
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+# Ralph Progress Log
+Started: 2026-03-30T00:15:00+05:30
+
+## Codebase Patterns
+- Tests use ephemeral PostgreSQL via pg_ctl (not Docker/testcontainers)
+- conftest.py provides database_url, clean_database, and client fixtures
+- All tests in tests/test_webhook.py
+- SQLAlchemy 2.0 with mapped_column pattern
+
+---
